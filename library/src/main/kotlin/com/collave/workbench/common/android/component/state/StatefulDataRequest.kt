@@ -60,7 +60,7 @@ open class StatefulDataRequest<T> : StatefulRequest<T> {
                     if (it == State.RequestError) {
                         throw lastError ?: Exception()
                     }
-                    data
+                    data!!
                 }
 
         execute(*args)
