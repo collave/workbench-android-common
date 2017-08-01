@@ -87,27 +87,25 @@ fun <T> Single<T>.withProgressDialog(context: Context, title: String, message: S
 }
 
 fun <T> Single<T>.subscribeWithErrorDialog(context: Context, callback: (T?, Throwable?, Boolean)->Unit) : Disposable {
-    return this.subscribe { data, error ->
-        if (error != null) {
-            when (error) {
-                is IOException -> {
-                    with (context) {
-                        alert {
-                            title = "Network Error"
-                            message = "Your internet seems unstable. Please try the request again."
-                            positiveButton("Retry") {
-                                callback(null, error, true)
-                            }
-                            negativeButton("Cancel") { }
-                        }.show()
-                    }
-                }
-                else -> {
-                    callback(null, error, false)
+    return this.subscribe({ data ->
+        callback(data, null, false)
+    }) { error ->
+        when (error) {
+            is IOException -> {
+                with (context) {
+                    alert {
+                        title = "Network Error"
+                        message = "Your internet seems unstable. Please try the request again."
+                        positiveButton("Retry") {
+                            callback(null, error, true)
+                        }
+                        negativeButton("Cancel") { }
+                    }.show()
                 }
             }
-        } else {
-            callback(data, error, false)
+            else -> {
+                callback(null, error, false)
+            }
         }
     }
 }

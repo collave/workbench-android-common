@@ -1,6 +1,7 @@
 package com.collave.workbench.common.android.component.state
 
 import com.collave.workbench.common.android.extension.onAndroidUI
+import com.google.common.base.Optional
 import io.reactivex.subjects.PublishSubject
 import java.lang.ref.WeakReference
 import kotlin.reflect.KProperty
@@ -16,7 +17,7 @@ class WeakVariable<T>(initial: T? = null) {
 
     var value by this
 
-    private val subject = PublishSubject.create<T?>()
+    private val subject = PublishSubject.create<Optional<T>>()
     val onValueUpdated = subject.onAndroidUI()
 
     operator fun getValue(thisRef: Any?, property: KProperty<*>): T? {
@@ -25,7 +26,7 @@ class WeakVariable<T>(initial: T? = null) {
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T?) {
         reference = if (value == null) null else WeakReference<T>(value)
-        subject.onNext(value)
+        subject.onNext(Optional.of(value))
     }
 
 }

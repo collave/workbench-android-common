@@ -33,14 +33,12 @@ abstract class StatefulRequest<T> {
     fun execute(vararg args: Any?) {
         if (state == State.InProgress) return
         state = State.InProgress
-        createRequest(*args).subscribe { result, error ->
-            if (error != null || result == null) {
-                lastError = error
-                state = State.RequestError
-                return@subscribe
-            }
+        createRequest(*args).subscribe({ result ->
             handleResult(result)
             state = State.Successful
+        }) { error ->
+            lastError = error
+            state = State.RequestError
         }
     }
 

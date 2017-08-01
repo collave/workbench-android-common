@@ -1,6 +1,7 @@
 package com.collave.workbench.common.android.component.state
 
 import com.collave.workbench.common.android.extension.onAndroidUI
+import com.google.common.base.Optional
 import io.reactivex.subjects.BehaviorSubject
 import kotlin.reflect.KProperty
 
@@ -10,7 +11,7 @@ import kotlin.reflect.KProperty
 class NullableVariable<T>(initial: T? = null) {
 
     var value: T? by this
-    private val subject = BehaviorSubject.create<T?>()
+    private val subject = BehaviorSubject.create<Optional<T>>()
     val onValueUpdated = subject.onAndroidUI()
 
     init {
@@ -20,11 +21,11 @@ class NullableVariable<T>(initial: T? = null) {
     }
 
     operator fun getValue(thisRef: Any?, property: KProperty<*>): T? {
-        return subject.value
+        return if (subject.hasValue()) subject.value.orNull() else null
     }
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T?) {
-        subject.onNext(value)
+        subject.onNext(Optional.of(value))
     }
 
 }

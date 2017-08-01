@@ -8,7 +8,7 @@ import kotlin.reflect.KProperty
  */
 open class StatefulDataRequest<T> : StatefulRequest<T> {
 
-    protected lateinit var creator: (Array<out Any?>)-> Single<T>
+    protected var creator: (Array<out Any?>)-> Single<T>
     protected var initial: ((Array<out Any?>)-> Single<T>)? = null
 
     constructor(creator: (Array<out Any?>)-> Single<T>): super() {
