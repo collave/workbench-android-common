@@ -149,15 +149,28 @@ abstract class BaseUI(open var data: Any? = null) : AnkoComponent<Any> {
     }
 
     fun toFragment(): UIFragment {
-        return UIFragment(this, data)
+        return UIFragment().apply {
+            retainInstance = true
+            ui = this@BaseUI
+        }
     }
 
-    fun toDialogFragment(manager: FragmentManager, tag: String, isFullScreen: Boolean = false, data: Any? = null): UIDialogFragment {
-        return UIDialogFragment(this, isFullScreen, data).apply { show(manager, tag) }
+    fun toDialogFragment(manager: FragmentManager, tag: String, isFullScreen: Boolean = false): UIDialogFragment {
+        return UIDialogFragment().apply {
+            retainInstance = true
+            ui = this@BaseUI
+            isFullHeight = isFullScreen
+            show(manager, tag)
+        }
     }
 
-    fun toDialogFragment(transaction: FragmentTransaction, tag: String, isFullScreen: Boolean = false, data: Any? = null): UIDialogFragment {
-        return UIDialogFragment(this, isFullScreen, data).apply { show(transaction, tag) }
+    fun toDialogFragment(transaction: FragmentTransaction, tag: String, isFullScreen: Boolean = false): UIDialogFragment {
+        return UIDialogFragment().apply {
+            retainInstance = true
+            ui = this@BaseUI
+            isFullHeight = isFullScreen
+            show(transaction, tag)
+        }
     }
 
 }
