@@ -12,7 +12,10 @@ import org.jetbrains.anko.AnkoContext
 /**
  * Created by Andrew on 6/2/2017.
  */
-class UIFragment(val ui: BaseUI, val data: Any? = null) : BaseFragment() {
+abstract class UIFragment : BaseFragment() {
+
+    abstract val ui: BaseUI
+    abstract val data: Any?
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         ui.data = data
@@ -35,4 +38,5 @@ class UIFragment(val ui: BaseUI, val data: Any? = null) : BaseFragment() {
         super.onActivityResult(requestCode, resultCode, data)
         ui.onActivityResult(requestCode, resultCode, data)
     }
+
 }
