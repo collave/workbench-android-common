@@ -15,8 +15,8 @@ import org.jetbrains.anko.wrapContent
  */
 open class UIDialogFragment : DialogFragment() {
 
-    lateinit var ui: BaseUI
-    var isFullHeight = false
+    open lateinit var ui: BaseUI
+    open var isFullHeight = false
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = Dialog(activity)

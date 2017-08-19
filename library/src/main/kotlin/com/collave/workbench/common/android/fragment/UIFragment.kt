@@ -14,7 +14,7 @@ import org.jetbrains.anko.AnkoContext
  */
 open class UIFragment : BaseFragment() {
 
-    lateinit var ui: BaseUI
+    open lateinit var ui: BaseUI
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return ui.createView(AnkoContext.Companion.create(context, this))
