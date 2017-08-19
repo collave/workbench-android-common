@@ -16,6 +16,7 @@ import org.jetbrains.anko.wrapContent
 abstract class UIDialogFragment : DialogFragment() {
 
     lateinit var ui: BaseUI
+    open var isFullWidth = false
     open var isFullHeight = false
 
     abstract fun onCreateUI(): BaseUI
@@ -28,7 +29,7 @@ abstract class UIDialogFragment : DialogFragment() {
         view.layoutParams = ViewGroup.LayoutParams(matchParent, matchParent)
         onViewCreated(view, savedInstanceState)
         dialog.setContentView(view)
-        dialog.window.setLayout(matchParent, if (isFullHeight) matchParent else wrapContent)
+        dialog.window.setLayout(if (isFullWidth) matchParent else wrapContent, if (isFullHeight) matchParent else wrapContent)
         return dialog
     }
 
