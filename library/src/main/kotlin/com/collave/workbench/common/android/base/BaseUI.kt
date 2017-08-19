@@ -9,7 +9,6 @@ import android.support.graphics.drawable.VectorDrawableCompat
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -19,8 +18,6 @@ import com.bumptech.glide.DrawableRequestBuilder
 import com.bumptech.glide.DrawableTypeRequest
 import com.collave.workbench.common.android.extension.loadUri
 import com.collave.workbench.common.android.extension.onAndroidUI
-import com.collave.workbench.common.android.fragment.UIDialogFragment
-import com.collave.workbench.common.android.fragment.UIFragment
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
@@ -148,29 +145,8 @@ abstract class BaseUI(open var data: Any? = null) : AnkoComponent<Any> {
         }
     }
 
-    fun toFragment(): UIFragment {
-        return UIFragment().apply {
-            retainInstance = true
-            ui = this@BaseUI
-        }
-    }
-
-    fun toDialogFragment(manager: FragmentManager, tag: String, isFullScreen: Boolean = false): UIDialogFragment {
-        return UIDialogFragment().apply {
-            retainInstance = true
-            ui = this@BaseUI
-            isFullHeight = isFullScreen
-            show(manager, tag)
-        }
-    }
-
-    fun toDialogFragment(transaction: FragmentTransaction, tag: String, isFullScreen: Boolean = false): UIDialogFragment {
-        return UIDialogFragment().apply {
-            retainInstance = true
-            ui = this@BaseUI
-            isFullHeight = isFullScreen
-            show(transaction, tag)
-        }
+    open fun toFragment(): Fragment {
+        throw Exception("UI must implement toFragment().")
     }
 
 }
