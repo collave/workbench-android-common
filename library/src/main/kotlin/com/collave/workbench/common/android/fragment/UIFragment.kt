@@ -12,7 +12,7 @@ import org.jetbrains.anko.AnkoContext
 /**
  * Created by Andrew on 6/2/2017.
  */
-class UIFragment : BaseFragment() {
+open class UIFragment : BaseFragment() {
 
     lateinit var ui: BaseUI
 

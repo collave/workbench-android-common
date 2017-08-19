@@ -13,7 +13,7 @@ import org.jetbrains.anko.wrapContent
 /**
  * Created by Andrew on 6/7/2017.
  */
-class UIDialogFragment : DialogFragment() {
+open class UIDialogFragment : DialogFragment() {
 
     lateinit var ui: BaseUI
     var isFullHeight = false
