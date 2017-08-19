@@ -12,9 +12,9 @@ import org.jetbrains.anko.AnkoContext
 /**
  * Created by Andrew on 6/2/2017.
  */
-open class UIFragment : BaseFragment() {
+abstract class UIFragment : BaseFragment() {
 
-    open lateinit var ui: BaseUI
+    abstract val ui: BaseUI
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return ui.createView(AnkoContext.Companion.create(context, this))
