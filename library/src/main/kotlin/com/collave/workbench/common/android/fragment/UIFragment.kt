@@ -14,9 +14,11 @@ import org.jetbrains.anko.AnkoContext
  */
 abstract class UIFragment : BaseFragment() {
 
-    abstract val ui: BaseUI
+    lateinit var ui: BaseUI
+    abstract fun onCreateUI(): BaseUI
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        ui = onCreateUI()
         return ui.createView(AnkoContext.Companion.create(context, this))
     }
 
@@ -26,10 +28,10 @@ abstract class UIFragment : BaseFragment() {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         val view = view
         if (view != null)
             ui.destroyView()
+        super.onDestroyView()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

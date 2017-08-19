@@ -1,17 +1,22 @@
 package com.collave.workbench.common.android.activity
 
-import android.support.v4.app.Fragment
+import android.os.Bundle
+import com.collave.workbench.common.android.base.BaseActivity
 import com.collave.workbench.common.android.base.BaseUI
+import org.jetbrains.anko.AnkoContext
 
 /**
  * Created by Andrew on 6/7/2017.
  */
-abstract class UIActivity : FragmentContainerActivity() {
+abstract class UIActivity : BaseActivity() {
 
-    abstract fun getUI(): BaseUI
+    lateinit var ui: BaseUI
+    abstract fun onCreateUI(): BaseUI
 
-    override fun getStartingFragment(): Fragment {
-        return getUI().toFragment()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        ui = onCreateUI()
+        ui.createView(AnkoContext.Companion.create(this, this, true))
+        ui.fillView()
     }
-
 }

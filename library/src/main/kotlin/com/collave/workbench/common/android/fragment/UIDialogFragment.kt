@@ -15,10 +15,14 @@ import org.jetbrains.anko.wrapContent
  */
 abstract class UIDialogFragment : DialogFragment() {
 
-    abstract val ui: BaseUI
-    open val isFullHeight = false
+    lateinit var ui: BaseUI
+    open var isFullHeight = false
+
+    abstract fun onCreateUI(): BaseUI
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        ui = onCreateUI()
+
         val dialog = Dialog(activity)
         val view = ui.createView(AnkoContext.Companion.create(context, this))
         view.layoutParams = ViewGroup.LayoutParams(matchParent, matchParent)
