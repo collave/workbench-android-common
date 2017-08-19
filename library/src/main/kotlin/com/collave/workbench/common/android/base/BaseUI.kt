@@ -145,8 +145,4 @@ abstract class BaseUI(open var data: Any? = null) : AnkoComponent<Any> {
         }
     }
 
-    open fun toFragment(): Fragment {
-        throw Exception("UI must implement toFragment().")
-    }
-
 }
