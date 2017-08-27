@@ -1,5 +1,6 @@
 package com.collave.workbench.common.android.activity
 
+import android.content.Intent
 import android.os.Bundle
 import com.collave.workbench.common.android.base.BaseActivity
 import com.collave.workbench.common.android.base.BaseUI
@@ -19,4 +20,10 @@ abstract class UIActivity : BaseActivity() {
         ui.createView(AnkoContext.Companion.create(this, this, true))
         ui.fillView()
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        ui.onActivityResult(requestCode, resultCode, data)
+    }
+
 }
