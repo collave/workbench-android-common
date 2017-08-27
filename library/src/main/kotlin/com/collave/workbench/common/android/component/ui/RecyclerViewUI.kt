@@ -8,7 +8,6 @@ import android.widget.LinearLayout
 import android.widget.ViewFlipper
 import com.collave.workbench.common.android.base.BaseUI
 import org.jetbrains.anko.*
-import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
 /**
@@ -43,7 +42,7 @@ abstract class RecyclerViewUI : BaseUI() {
                 swipeRefreshLayout = swipeRefreshLayout {
                     isEnabled = refreshAllowed
                     viewFlipper = viewFlipper {
-                        recyclerView = recyclerView {
+                        recyclerView = createRecyclerView().apply {
                             layoutManager = this@RecyclerViewUI.createLayoutManager()
                             adapter = this@RecyclerViewUI.adapter
                         }
@@ -58,6 +57,7 @@ abstract class RecyclerViewUI : BaseUI() {
         verticalLayout
     }
 
+    open fun createRecyclerView(): RecyclerView = RecyclerView(context)
     open fun createErrorBarView(ui: _LinearLayout): View = ui.frameLayout()
     open fun createEmptyView(ui: @AnkoViewDslMarker ViewFlipper): View = ui.frameLayout()
     open fun createErrorView(ui: @AnkoViewDslMarker ViewFlipper): View = ui.frameLayout()
