@@ -46,7 +46,7 @@ abstract class RecyclerViewUI : BaseUI() {
                         recyclerView = add(createRecyclerView()) {
                             layoutManager = this@RecyclerViewUI.createLayoutManager()
                             adapter = this@RecyclerViewUI.adapter
-                        }.lparams(matchParent, matchParent)
+                        }
                         emptyView = createEmptyView(this)
                         loadingView = createLoadingView(this)
                         errorView = createErrorView(this)
