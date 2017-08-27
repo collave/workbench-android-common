@@ -38,7 +38,7 @@ abstract class ListRecyclerViewUI<T: Any> : RecyclerViewUI() {
 
             onStateUpdated
                     .subscribe {
-                        swipeRefreshLayout.isRefreshing = it.isInProgress && data != null
+                        swipeRefreshLayout.isRefreshing = refreshAllowed && it.isInProgress && data != null
                         setErrorBarVisible(it.isRequestError)
 
                         val data = data
