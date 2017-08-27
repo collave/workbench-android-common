@@ -106,6 +106,10 @@ abstract class BaseUI(open var data: Any? = null) : AnkoComponent<Any> {
         disposables = null
     }
 
+    open fun refreshView() {
+        children.forEach { it.refreshView() }
+    }
+
     open fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         onActivityResultSubject.onNext(ActivityResult(requestCode, resultCode, data))
         children.asSequence().distinct().forEach { it.onActivityResult(requestCode, resultCode, data) }
