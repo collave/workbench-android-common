@@ -25,7 +25,7 @@ abstract class UIDialogFragment : DialogFragment() {
         ui = onCreateUI()
 
         val dialog = Dialog(activity)
-        val view = ui.createView(AnkoContext.Companion.create(context, this))
+        val view = ui.createView(AnkoContext.Companion.create(context!!, this))
         view.layoutParams = ViewGroup.LayoutParams(matchParent, matchParent)
         onViewCreated(view, savedInstanceState)
         dialog.setContentView(view)
@@ -33,7 +33,7 @@ abstract class UIDialogFragment : DialogFragment() {
         return dialog
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ui.fillView()
     }

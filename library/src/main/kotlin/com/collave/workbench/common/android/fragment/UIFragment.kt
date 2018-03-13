@@ -17,9 +17,9 @@ abstract class UIFragment : BaseFragment() {
     lateinit var ui: BaseUI
     abstract fun onCreateUI(): BaseUI
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         ui = onCreateUI()
-        return ui.createView(AnkoContext.Companion.create(context, this))
+        return ui.createView(AnkoContext.Companion.create(context!!, this))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
