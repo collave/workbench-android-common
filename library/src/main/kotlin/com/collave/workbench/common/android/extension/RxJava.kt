@@ -75,7 +75,7 @@ fun <T> Single<T>.withProgressDialog(context: Context, title: String, message: S
     var progressDialog: ProgressDialog? = null
     return this
             .doOnSubscribe {
-                if ((context as? Activity)?.isFinishing ?: false) return@doOnSubscribe
+                if ((context as? Activity)?.isFinishing == true) return@doOnSubscribe
                 progressDialog = ProgressDialog.show(context, title, message, true, false)
             }
             .doAfterTerminate {

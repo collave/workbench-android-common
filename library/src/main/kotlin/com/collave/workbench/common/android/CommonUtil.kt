@@ -12,10 +12,10 @@ object CommonUtil {
     private val viewIdGenerator = AtomicInteger(15000000)
 
     fun generateViewId(): Int {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            return generateUniqueViewId()
+        return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            generateUniqueViewId()
         } else {
-            return View.generateViewId()
+            View.generateViewId()
         }
     }
 

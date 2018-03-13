@@ -13,10 +13,6 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import com.bumptech.glide.DrawableRequestBuilder
-import com.bumptech.glide.DrawableTypeRequest
-import com.collave.workbench.common.android.extension.loadUri
 import com.collave.workbench.common.android.extension.onAndroidUI
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -137,16 +133,6 @@ abstract class BaseUI(open var data: Any? = null) : AnkoComponent<Any> {
         val view = ui.createView(ctx)
         addView(view)
         return ui
-    }
-
-    fun ImageView.loadUri(uri: String?, init: (DrawableTypeRequest<String>.()->DrawableRequestBuilder<String>)? = null) {
-        if (uri == null || uri.isEmpty()) return
-        val fragment = fragment
-        if (fragment != null) {
-            loadUri(fragment, uri, init)
-        } else {
-            loadUri(context, uri, init)
-        }
     }
 
 }
