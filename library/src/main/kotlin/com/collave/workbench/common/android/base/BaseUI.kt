@@ -32,10 +32,10 @@ abstract class BaseUI(open var data: Any? = null) : AnkoComponent<Any> {
     var parent: BaseUI?
         get() = parentRef?.get()
         set(value) {
-            if (value != null)
-                parentRef = WeakReference(value)
+            parentRef = if (value != null)
+                WeakReference(value)
             else
-                parentRef = null
+                null
         }
 
     lateinit var view: View

@@ -13,7 +13,7 @@ class WeakVariable<T>(initial: T? = null) {
 
     var reference: WeakReference<T>? =
             if (initial == null) null
-            else WeakReference<T>(initial)
+            else WeakReference(initial)
 
     var value by this
 
@@ -25,7 +25,7 @@ class WeakVariable<T>(initial: T? = null) {
     }
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T?) {
-        reference = if (value == null) null else WeakReference<T>(value)
+        reference = if (value == null) null else WeakReference(value)
         subject.onNext(Optional.fromNullable(value))
     }
 

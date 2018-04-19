@@ -21,11 +21,11 @@ class NullableVariable<T>(initial: T? = null) {
     }
 
     operator fun getValue(thisRef: Any?, property: KProperty<*>): T? {
-        return if (subject.hasValue()) subject.value.orNull() else null
+        return if (subject.hasValue()) subject.value?.orNull() else null
     }
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T?) {
-        subject.onNext(Optional.of(value))
+        subject.onNext(Optional.fromNullable(value))
     }
 
 }

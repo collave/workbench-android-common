@@ -1,18 +1,12 @@
 package com.collave.workbench.common.android.extension
 
 import android.app.AlertDialog
-import android.content.Context
-import android.graphics.drawable.Drawable
-import android.support.v4.app.Fragment
 import android.support.v4.view.ViewCompat
 import android.support.v4.view.ViewPropertyAnimatorCompat
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
-import android.widget.ImageView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.RequestBuilder
 import org.jetbrains.anko.backgroundResource
 
 /**
@@ -46,29 +40,6 @@ fun <T: View> T.onLayoutReady(callback: T.()->Unit) {
 
 fun View.animateCompat(): ViewPropertyAnimatorCompat {
     return ViewCompat.animate(this)
-}
-
-fun ImageView.loadUri(fragment: Fragment, url: String, init: ((RequestBuilder<Drawable>)->RequestBuilder<Drawable>)? = null) {
-    Glide.with(this).clear(this)
-    setImageDrawable(null)
-    if (url.isNotEmpty()) {
-        if (init != null) {
-            init.invoke(Glide.with(fragment).load(url)).into(this)
-        } else {
-            Glide.with(fragment).load(url).into(this)
-        }
-    }
-}
-fun ImageView.loadUri(context: Context, url: String, init: ((RequestBuilder<Drawable>)->RequestBuilder<Drawable>)? = null) {
-    Glide.with(this).clear(this)
-    setImageDrawable(null)
-    if (url.isNotEmpty()) {
-        if (init != null) {
-            init.invoke(Glide.with(context).load(url)).into(this)
-        } else {
-            Glide.with(context).load(url).into(this)
-        }
-    }
 }
 
 fun View.useSelectableBackground() {

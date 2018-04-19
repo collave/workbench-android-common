@@ -14,7 +14,7 @@ class Variable<T>(default: T) {
     val onValueUpdated = subject.onAndroidUI()
 
     operator fun getValue(thisRef: Any?, property: KProperty<*>): T {
-        return subject.value
+        return subject.value!!
     }
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {

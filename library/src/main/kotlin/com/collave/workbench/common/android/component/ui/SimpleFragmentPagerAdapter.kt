@@ -1,4 +1,4 @@
-package com.collave.workbench.common.android.component
+package com.collave.workbench.common.android.component.ui
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
